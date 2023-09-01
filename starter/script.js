@@ -61,6 +61,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //COMPUTING THE DOM
 containerMovements.innerHTML = ' ';
 
@@ -81,6 +82,13 @@ containerMovements.innerHTML = ' ';
   });
 })(account1.movements);
 
+// COMPUTING THE GLOBAL BALANCE
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, val) => acc + val, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
+
 //COMPUTING THE USERNAME
 
 (acts => {
@@ -98,8 +106,6 @@ console.log(accounts);
 /////////////////////////////////////////////////
 
 // LECTURES
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -306,3 +312,27 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // };
 
 // console.log(withdraw(movements));
+
+// // REDUCE METHOD
+
+// console.log(movements);
+
+// const globalBalance = movements.reduce(function (acc, val, i, arry) {
+//   return acc + val;
+// }, 0);
+// console.log(globalBalance);
+
+// //DOING THE RETURN METHOD MANUALLY.
+// let sum = 0;
+// for (const mov of movements) {
+//   sum += mov;
+// }
+// console.log(sum);
+
+// // Other ways to use REDUCE
+// const max = movements.reduce(
+//   (acc, mov) => (acc > mov ? acc : mov),
+//   0
+// ); /*find the maximum value*/
+
+// console.log(max);
