@@ -33,7 +33,14 @@ const account4 = {
   pin: 4444,
 };
 
-const accounts = [account1, account2, account3, account4];
+const account5 = {
+  owner: 'Sandra Jester',
+  movements: [430, 1000, 700, 50, -90, 2000],
+  interestRate: 1,
+  pin: 5555,
+};
+
+const accounts = [account1, account2, account3, account4, account5];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -65,8 +72,8 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //COMPUTING THE DOM
 containerMovements.innerHTML = ' ';
 
-(function (movements) {
-  movements.forEach((value, i) => {
+const displayMovements = function (account) {
+  account.movements.forEach((value, i) => {
     const type = value > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -74,20 +81,42 @@ containerMovements.innerHTML = ' ';
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${value}</div>
+        <div class="movements__value">${Math.abs(value)}$</div>
       </div>
       `;
 
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
-})(account1.movements);
+};
 
 // COMPUTING THE GLOBAL BALANCE
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce((acc, val) => acc + val, 0);
-  labelBalance.textContent = `${balance} EUR`;
+const calcDisplayBalance = function (account) {
+  account.balance = account.movements.reduce((acc, val) => acc + val, 0);
+  labelBalance.textContent = `${account.balance}$`;
 };
-calcDisplayBalance(account1.movements);
+
+//COMPUTING THE TOTAL INCOME AND OUTCOME AND INTEREST.
+
+const calDisplaySumary = function (account) {
+  const income = account.movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => (acc += mov));
+
+  labelSumIn.textContent = `${income}$`;
+
+  const out = account.movements
+    .filter(mov => mov < 0)
+    ?.reduce((acc, mov) => (acc += mov));
+
+  labelSumOut.textContent = `${Math.abs(out)}$`;
+
+  const interest = account.movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * account.interestRate) / 100)
+    .reduce((acc, mov) => (acc += mov));
+
+  labelSumInterest.textContent = `${interest}$`;
+};
 
 //COMPUTING THE USERNAME
 
@@ -101,6 +130,54 @@ calcDisplayBalance(account1.movements);
   });
 })(accounts);
 console.log(accounts);
+
+const updateUI = acc => {
+  //calculate Balance
+  calcDisplayBalance(acc);
+  // calculate Summary
+  calDisplaySumary(acc);
+  // display Movements
+  displayMovements(acc);
+};
+
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    containerApp.style.opacity = 100;
+    //display UI and welcome message!
+    labelWelcome.textContent = `Good day ${
+      currentAccount.owner.split(' ')[0]
+    }!`;
+    inputLoginUsername.value = inputLoginPin.value = '';
+
+    updateUI(currentAccount);
+  }
+});
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiver = accounts.find(acc => acc.username === inputTransferTo.value);
+  inputTransferTo.value = inputTransferAmount.value = '';
+  if (
+    amount > 0 &&
+    currentAccount.balance >= amount &&
+    receiver &&
+    receiver.username !== currentAccount.username
+  ) {
+    currentAccount.movements.push(-amount);
+    receiver.movements.push(amount);
+
+    updateUI(currentAccount);
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -336,3 +413,15 @@ console.log(accounts);
 // ); /*find the maximum value*/
 
 // console.log(max);
+
+// // FIND METHOD The Find method returns the element that matches contisions set.
+
+// const withdrawal = movements.find(mov => mov < 0);
+
+// console.log(withdrawal);
+
+// // Finding an account in the accounts array.
+
+// const account = accounts.find(act => act.username === 'js');
+
+// console.log(account);
