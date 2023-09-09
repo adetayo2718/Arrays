@@ -81,7 +81,7 @@ const displayMovements = function (movements) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${Math.abs(value)}$</div>
+        <div class="movements__value">${value}$</div>
       </div>
       `;
 
@@ -129,7 +129,6 @@ const calDisplaySumary = function (account) {
       .join('');
   });
 })(accounts);
-console.log(accounts);
 
 const updateUI = acc => {
   //calculate Balance
@@ -137,7 +136,7 @@ const updateUI = acc => {
   // calculate Summary
   calDisplaySumary(acc);
   // display Movements
-  displayMovements(acc);
+  displayMovements(acc.movements);
 };
 
 let currentAccount;
@@ -209,17 +208,6 @@ btnClose.addEventListener('click', function (e) {
   }
 
   containerApp.style.opacity = 0;
-});
-
-console.log(accounts);
-
-let on = false;
-
-const btn_do_it = document.querySelector('.do_it');
-` `;
-btn_do_it.addEventListener('click', e => {
-  !on ? console.log('e don work') : console.log('e no work');
-  on = !on;
 });
 
 /////////////////////////////////////////////////
@@ -517,18 +505,51 @@ btn_do_it.addEventListener('click', e => {
 
 // console.log(total);
 
-// OTHER WAYS OF CREATING ARRAYS PROGRAMATICALLY
-const arr = [1, 2, 3, 4, 5, 6, 7];
-console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+//Sort Method. This is used to sort alphabets or Numbers clockwise or anticlockwise.
 
-// ARRAY FILL
-const x = new Array(7);
+// //Sorting Strings/aphabest
+// const person = ['John', 'mayowa', 'dumelo'].sort();
+// console.log(person);
+
+// const fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+// fruits.sort();
+// console.log(fruits);
+
+// //sorting numbers
+// const num = [200, 300, -150, -250, -350, 800, 3000];
+// num.sort((a, b) => a - b);
+// console.log(num);
+
+// //OTHER WAYS OF CREATING ARRAYS PROGRAMATICALLY
+// const arr = [1, 2, 3, 4, 5, 6, 7];
+// console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// // ARRAY FILL
+// const x = new Array(7);
+// console.log(x);
+// //  This wont work to fill the empty array
+// // console.log(x.map(() => 5));
+
+// const xy = x.fill(3, 1, 6);
+// const yx = arr.fill(40, 3, 4); /*this will mutate the original array*/
+// /*The first arguement is the element to fill in, the second argument is the start index and the third arguement is the stop index.*/
+// console.log(xy);
+// console.log(yx);
+// console.log(arr);
+
+// Array.From
+//The new Array.from method will have 2 arguements, the second arguement is a a callback function.
+const x = Array.from({ length: 7 }, () => 1);
 console.log(x);
-//  This wont work to fill the empty array
-// console.log(x.map(() => 5));
 
-const xy = x.fill(3, 1, 6);
-const yx = arr.fill(40, 3, 4);
-/*The first arguement is the element to fill in, the second argument is the start index and the third arguement is the stop index.*/
+const xy = Array.from({ length: 5 }, (cur, i) => i + 1);
 console.log(xy);
-console.log(yx);
+
+let newArr;
+labelBalance.addEventListener('click', e => {
+  e.preventDefault();
+  const movementU1 = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('$', ''))
+  );
+});
