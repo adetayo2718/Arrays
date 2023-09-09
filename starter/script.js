@@ -72,8 +72,8 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //COMPUTING THE DOM
 containerMovements.innerHTML = ' ';
 
-const displayMovements = function (account) {
-  account.movements.forEach((value, i) => {
+const displayMovements = function (movements) {
+  movements.forEach((value, i) => {
     const type = value > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -177,6 +177,49 @@ btnTransfer.addEventListener('click', function (e) {
 
     updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    currentAccount.movements.push(amount);
+
+    updateUI(currentAccount);
+
+    inputLoanAmount.value = '';
+  }
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  const closeUser = inputCloseUsername.value;
+  const closeUserPin = Number(inputClosePin.value);
+
+  const index = accounts.findIndex(acc => acc.username === closeUser);
+
+  console.log(index);
+  if (
+    closeUser === currentAccount.username &&
+    closeUserPin === currentAccount.pin
+  ) {
+    accounts.splice(index, 1);
+  }
+
+  containerApp.style.opacity = 0;
+});
+
+console.log(accounts);
+
+let on = false;
+
+const btn_do_it = document.querySelector('.do_it');
+` `;
+btn_do_it.addEventListener('click', e => {
+  !on ? console.log('e don work') : console.log('e no work');
+  on = !on;
 });
 
 /////////////////////////////////////////////////
@@ -414,7 +457,7 @@ btnTransfer.addEventListener('click', function (e) {
 
 // console.log(max);
 
-// // FIND METHOD The Find method returns the element that matches contisions set.
+// // FIND METHOD The Find method returns the element that matches conditions set.
 
 // const withdrawal = movements.find(mov => mov < 0);
 
@@ -425,3 +468,67 @@ btnTransfer.addEventListener('click', function (e) {
 // const account = accounts.find(act => act.username === 'js');
 
 // console.log(account);
+
+// // THE FIND INDEX METHOD. The find index method returns the index of the element that matches the condition set
+
+// const indx = accounts.findIndex(acc => acc.username === 'ss');
+
+// console.log(indx);
+
+// //THE SOME METHOD
+// console.log(movements);
+
+// // EQUALITY
+// console.log(movements.includes(-130));
+
+// console.log(movements.some(mov => mov === -130));
+
+// //CONDITION
+// const anyDeposits = movements.some(mov => mov > 0);
+// console.log(anyDeposits);
+
+// // THE EVERY METHOD
+
+// console.log(movements.every(mov => mov > 0));
+// console.log(account4.movements.every(mov => mov > 0));
+
+//THE FLAT METHOD. This method is used to marge together nested arrays together into one big array.
+
+// const arry = [[1, 2, 3], 4, 5, [6, 7, 8], 9, 0];
+
+// console.log(arry);
+// console.log(arry.flat());
+
+// const arry2 = [[[1, 2], 3], 4, [5], [6, [7, 8]], [9], 0];
+
+// console.log(arry2.flat(2));
+
+// const total = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(total);
+
+// // THE FLATMAP METHOD
+// const total = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+
+// console.log(total);
+
+// OTHER WAYS OF CREATING ARRAYS PROGRAMATICALLY
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// ARRAY FILL
+const x = new Array(7);
+console.log(x);
+//  This wont work to fill the empty array
+// console.log(x.map(() => 5));
+
+const xy = x.fill(3, 1, 6);
+const yx = arr.fill(40, 3, 4);
+/*The first arguement is the element to fill in, the second argument is the start index and the third arguement is the stop index.*/
+console.log(xy);
+console.log(yx);

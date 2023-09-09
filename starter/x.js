@@ -1,8 +1,6 @@
 'use strict';
-
 // Coding Challenge #1
-
-/* 
+/*
 Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners about their dog's age, and stored the data into an array (one array for each). For now, they are just interested in knowing whether a dog is an adult or a puppy. A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years old.
 
 Create a function 'checkDogs', which accepts 2 arrays of dog's ages ('dogsJulia' and 'dogsKate'), and does the following things:
@@ -19,15 +17,12 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
-
 // const checkDogs = (dogsJulia, dogsKate) => {
 //   //   const correctedJulia = dogsJulia.slice(1, 3);
 //   const correctedJulia = dogsJulia.slice();
 //   correctedJulia.splice(-2);
 //   correctedJulia.splice(0, 1);
-
 //   const dogs = correctedJulia.concat(dogsKate);
-
 //   dogs.forEach((value, i) => {
 //     value > 3
 //       ? console.log(
@@ -36,15 +31,12 @@ GOOD LUCK 😀
 //       : console.log(`Dog number ${i + 1} is still a puppy 🐶`);
 //   });
 // };
-
 // checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 // console.log('---Test Data 2---');
 // checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
-
 ///////////////////////////////////////
 // Coding Challenge #2
-
-/* 
+/*
 Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
 
 Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
@@ -59,7 +51,6 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 
 GOOD LUCK 😀
 */
-
 // const calcAverageHumanAge = function (arr) {
 //   arr.map(function (dog) {
 //     return dog * 1;
@@ -72,46 +63,14 @@ GOOD LUCK 😀
 //     return acc;
 //   }, 0);
 // };
-
 // const data = [5, 2, 4, 1, 15, 8, 3];
-
 // const calcAverageHumanAge2 = data =>
 //   data
 //     .map(age => (age <= 2 ? age * 2 : 16 + age * 4))
 //     .filter(dog => dog >= 18)
 //     .reduce((acc, dog, i, arr) => (acc += dog / arr.length), 0);
-
 // console.log(calcAverageHumanAge2(data));
 // console.log(calcAverageHumanAge2([16, 6, 10, 5, 6, 1, 4]));
-
-// const x = Array.from({ length: 1000 }, (cur, i, array) => {
-//   return (i = Math.trunc(Math.random() * 20));
-// });
-
-// console.log(x);
-// const y = new Set(x);
-
-// console.log(y);
-
-// const opMan = b => b * (99.2 + 74.4);
-
-// const pensionTotal = noTaxPaid => {
-//   const careCo = noTaxPaid * (59.2 + 44.4);
-//   return (no, fn, b) => {
-//     let amt = fn(b);
-//     return (
-//       `Debo, your total tax saved is: ` + (amt + careCo + no * (79.2 + 59.4))
-//     );
-//   };
-// };
-
-// const totalPen = pensionTotal(11);
-
-// console.log(totalPen(7, opMan, 1));
-
-// const dynamicArray = Array.from(
-//   { length: 7 },
-//   (cur, i) => (cur = Math.trunc(Math.random() * 10))
-// );
-
-// console.log(dynamicArray);
+const x = Array.from({ length: 100 }, (cur, i) => {
+  i + 1;
+});
