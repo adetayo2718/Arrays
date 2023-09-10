@@ -537,19 +537,90 @@ btnClose.addEventListener('click', function (e) {
 // console.log(yx);
 // console.log(arr);
 
-// Array.From
-//The new Array.from method will have 2 arguements, the second arguement is a a callback function.
-const x = Array.from({ length: 7 }, () => 1);
-console.log(x);
+// // Array.From
+// //The new Array.from method will have 2 arguements, the second arguement is a a callback function.
+// const x = Array.from({ length: 7 }, () => 1);
+// console.log(x);
 
-const xy = Array.from({ length: 5 }, (cur, i) => i + 1);
-console.log(xy);
+// const xy = Array.from({ length: 5 }, (cur, i) => i + 1);
+// console.log(xy);
 
-let newArr;
-labelBalance.addEventListener('click', e => {
-  e.preventDefault();
-  const movementU1 = Array.from(
-    document.querySelectorAll('.movements__value'),
-    el => Number(el.textContent.replace('$', ''))
-  );
-});
+// let newArr;
+// labelBalance.addEventListener('click', e => {
+//   e.preventDefault();
+//   const movementU1 = Array.from(
+//     document.querySelectorAll('.movements__value'),
+//     el => Number(el.textContent.replace('$', ''))
+//   );
+// });
+
+// // ARRAY METHODS PRACTICE
+
+// //Get the total amnt deposited.
+// const bankDeposit = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov > 0)
+//   .reduce((acc, sum) => acc + sum, 0);
+
+// console.log(bankDeposit);
+
+// //Total num of deposits over 1000
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+// console.log(numDeposits1000);
+
+// //Total num of deposits over 1000 with reduce method
+// const num2Deposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+// console.log(num2Deposits1000);
+
+// //Return a string with the reduce method. Calculate the total deposit nd total withdrawl.
+
+// const sums = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (add, cur) => {
+//       // cur > 0 ? (add.deposit += cur) : (add.withdral += cur);
+//       add[cur > 0 ? 'deposit' : 'withdral'] += cur;
+//       return add;
+//     },
+//     { deposit: 0, withdral: 0 }
+//   );
+
+// //Destructoring the results to display the values.
+// const { deposit, withdral } = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (add, cur) => {
+//       cur > 0 ? (add.deposit += cur) : (add.withdral += cur);
+//       return add;
+//     },
+//     { deposit: 0, withdral: 0 }
+//   );
+// console.log(sums);
+// console.log(deposit, withdral);
+
+// //Working with strings and capitalising words.
+// const excemptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+// const capitalizeWord = function (letters) {
+//   const capital = str => str[0].toUpperCase() + str.slice(1);
+
+//   const capitalisedWords = letters
+//     .toLowerCase()
+//     .split(' ')
+//     .map(word => (excemptions.includes(word) ? word : capital(word)));
+
+//   return capital(capitalisedWords.join(' '));
+// };
+
+// console.log(
+//   capitalizeWord(
+//     'this is a NICE title, this is also a LONG title but not too long'
+//   )
+// );
+// console.log(capitalizeWord('and here is another title with an EXAMPLE'));
